@@ -12,7 +12,7 @@ const register = async (req, res) => {
         //check if the user already exists
         const user = await models.users.findOne({
             where: {
-                [Op.or]: [{ email: email }, { username }]
+                [Op.or]: [{ email }, { username }]
             }
         })
         if (user) {
