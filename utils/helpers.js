@@ -10,3 +10,5 @@ return new Promise((resolve, reject) => {
     });
 })
 } 
+
+module.exports = hashPassword
