@@ -6,6 +6,8 @@
     "joi": "^17.9.2",
     "mysql2": "^3.6.0",
     "sequelize": "^6.32.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
     "uuidv4": "^6.2.13",
     "yarn": "^1.22.19"
   },
