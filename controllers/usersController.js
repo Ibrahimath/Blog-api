@@ -1,6 +1,7 @@
-
-
-
+const { Op } = require('sequelize');
+const { hashPassword, comparePassword } = require('../utils/helpers');
+const jwt = require('jsonwebtoken');
+const uuid = require('uuid');
 
 
 const register = async (req, res) => { 
@@ -76,8 +77,8 @@ const login = async (req, res) => {
         }
         //generate token
         const token = jwt.sign({
-            email: user.dataValues.email_address,
-            _id: uuidv4()
+            email: user.dataValues.email,
+            _id: uuid()
         }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
         res.status(200).json({

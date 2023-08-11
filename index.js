@@ -1,12 +1,16 @@
+const express = require('express')
+const displayRoutes = require('express-routemap')
+const app = express()
 
 
+const userRoutes = require('./routes/userRoutes')
 
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express")
 
 
 
-
+app.use('/blog', userRoutes)
 
 const swaggerDefinition = {
     openapi: "3.0.0",
@@ -42,3 +46,6 @@ const swaggerDefinition = {
   const swaggerSpec = swaggerJSDoc(options);
 
  app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+ 
+ app.listen(3000, displayRoutes());
