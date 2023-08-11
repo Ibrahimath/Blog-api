@@ -60,13 +60,11 @@ const login = async (req, res) => {
         } 
         //check if the user already exists
         const user = await models.Users.findOne({
-            where: {
-                email_address: email
-            }
+            where: {email}
         })
 
      
-        if (user == null) {
+        if (!user) {
             res.status(400)
             throw new Error('Invalid credentials');
         }
