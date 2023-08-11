@@ -2,12 +2,13 @@ const { Op } = require('sequelize');
 const { hashPassword, comparePassword } = require('../utils/helpers');
 const jwt = require('jsonwebtoken');
 const uuid = require('uuid');
-
+const models = require('../models')
+const sequelize = require('sequelize');
 
 const register = async (req, res) => { 
-
+    try{
     const { surname, othernames, email, user_id, password, username ,about_me} = req.body;
-    try { 
+    
         //validate the request body first before proceeding
         
         //check if the user already exists
@@ -45,7 +46,8 @@ const register = async (req, res) => {
         const { code, message } = err
         res.status(code || 500).json({
             status: false,
-            message: message || 'Something went wrong'
+            message: message || 'Something went wrong',
+            error: err.message || err
         });
     }
 
