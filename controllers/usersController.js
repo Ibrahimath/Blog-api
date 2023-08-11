@@ -5,7 +5,7 @@
 
 const register = async (req, res) => { 
 
-    const { surname, othernames, email, user_id, password, username, about_me } = req.body;
+    const { surname, othernames, email, user_id, password, username ,about_me} = req.body;
     try { 
         //validate the request body first before proceeding
         
