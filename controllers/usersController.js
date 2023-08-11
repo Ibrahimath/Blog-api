@@ -23,7 +23,7 @@ const register = async (req, res) => {
             });
         }
         //create the user
-        const { hash, salt } = await hashPassword(password);
+        const { hash} = await hashPassword(password);
         await models.Users.create({
             user_id: uuidv4(),
             surname,
