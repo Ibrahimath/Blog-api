@@ -11,4 +11,12 @@ return new Promise((resolve, reject) => {
 })
 } 
 
-module.exports = {hashPassword}
+const comparePassword = async (password,hash) => {
+    return new Promise((resolve, reject) => {
+        bcrypt.compare(password, hash, function(err, result) {
+           resolve({ result })
+        });
+    })
+} 
+
+module.exports = {hashPassword, comparePassword}

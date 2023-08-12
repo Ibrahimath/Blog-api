@@ -1,3 +1,4 @@
+require('dotenv').config()
 const { Op } = require('sequelize');
 const { hashPassword, comparePassword } = require('../utils/helpers');
 const jwt = require('jsonwebtoken');
@@ -25,7 +26,7 @@ const register = async (req, res) => {
     
         //validating the request body
         if (validateRegister(req.body).error){
-            console.log("AAAAA" + validateRegister(req.body).error);
+            //console.log("AAAAA" + validateRegister(req.body).error);
             throw new Error(validateRegister(req.body).error)
         }
         //check if the user already exists
@@ -75,7 +76,7 @@ const login = async (req, res) => {
             throw new Error('All fields are required');
         } 
         //check if the user already exists
-        const user = await models.Users.findOne({
+        const user = await models.user.findOne({
             where: {email}
         })
 
