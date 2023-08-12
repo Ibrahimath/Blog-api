@@ -1,9 +1,23 @@
 const { Op } = require('sequelize');
 const { hashPassword, comparePassword } = require('../utils/helpers');
 const jwt = require('jsonwebtoken');
-const uuid = require('uuid');
+const { uuid } = require('uuidv4')
 const models = require('../models')
 const sequelize = require('sequelize');
+const { validateEditProfile, validateRegister,
+    validatePost, validateEditPost,
+    validateAddComment, validateEditComment,
+    validateReactionToPost} = require('../Validations');
+
+
+// models.Post.hasMany(models.Comments, { foreignKey: 'post_id' });
+// models.Comments.belongsTo(models.Post, { foreignKey: 'post_id' });
+// models.Users.hasMany(models.Post, { foreignKey: 'user_id' });
+// models.Post.belongsTo(models.Users, { foreignKey: 'user_id' });
+// models.Users.hasMany(models.Comments, { foreignKey: 'user_id' });
+// models.Comments.belongsTo(models.Users, { foreignKey: 'user_id' });
+// models.Post.hasMany(models.Reactions, { foreignKey: 'post_id' });
+// models.Reactions.belongsTo(models.Post, { foreignKey: 'post_id' });
 
 const register = async (req, res) => { 
     try{
@@ -12,7 +26,7 @@ const register = async (req, res) => {
         //validate the request body first before proceeding
         
         //check if the user already exists
-        const user = await models.users.findOne({
+        const user = await models.user.findOne({
             where: {
                 [Op.or]: [{ email }, { username }]
             }
@@ -26,8 +40,8 @@ const register = async (req, res) => {
         }
         //create the user
         const { hash} = await hashPassword(password);
-        await models.Users.create({
-            user_id: uuidv4(),
+        await models.user.create({
+            user_id: uuid(),
             surname,
             othernames,
             email: email,
