@@ -44,10 +44,10 @@ const register = async (req, res) => {
 
     } catch (err) { 
         const { code, message } = err
+        console.log(err.message || err);
         res.status(code || 500).json({
             status: false,
             message: message || 'Something went wrong',
-            error: err.message || err
         });
     }
 
