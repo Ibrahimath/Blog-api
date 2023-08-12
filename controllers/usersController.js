@@ -2,7 +2,7 @@ require('dotenv').config()
 const { Op } = require('sequelize');
 const { hashPassword, comparePassword } = require('../utils/helpers');
 const jwt = require('jsonwebtoken');
-const { uuid } = require('uuidv4')
+const {v4: uuidv4 } = require('uuidv4')
 const models = require('../models')
 const sequelize = require('sequelize');
 const { validateEditProfile, validateRegister,
@@ -42,7 +42,7 @@ const register = async (req, res) => {
         //create the user
         const { hash} = await hashPassword(password);
         await models.user.create({
-            user_id: uuid(),
+            user_id: uuidv4(),
             surname,
             othernames,
             email: email,

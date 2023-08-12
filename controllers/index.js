@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const basename = path.basename(__filename);
+const controllers = {}
 
 
 fs
@@ -14,6 +15,6 @@ fs
     );
   })
   .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
+    const controller = require(path.join(__dirname, file));
+    controllers[controller.name] = controller
   })
