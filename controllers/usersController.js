@@ -23,8 +23,11 @@ const register = async (req, res) => {
     try{
     const { surname, othernames, email, user_id, password, username ,about_me} = req.body;
     
-        //validate the request body first before proceeding
-        
+        //validating the request body
+        if (validateRegister(req.body).error){
+            console.log("AAAAA" + validateRegister(req.body).error);
+            throw new Error(validateRegister(req.body).error)
+        }
         //check if the user already exists
         const user = await models.user.findOne({
             where: {
@@ -32,11 +35,8 @@ const register = async (req, res) => {
             }
         })
         if (user) {
-          
-            throw new Error({
-                code: 400,
-                message:'User already exists'
-            });
+          //console.log("user already exists");
+            throw new Error('User already exists');
         }
         //create the user
         const { hash} = await hashPassword(password);
@@ -58,7 +58,6 @@ const register = async (req, res) => {
 
     } catch (err) { 
         const { code, message } = err
-        console.log(err.message || err);
         res.status(code || 500).json({
             status: false,
             message: message || 'Something went wrong',
