@@ -1,8 +1,8 @@
-const express = require('express')
+//const express = require('express')
 const displayRoutes = require('express-routemap');
-const app = express()
+//const app = express()
 const bodyParser = require('body-parser')
-
+const app = require('express')()
 const userRoutes = require('./routes/userRoutes')
 const port = process.env.PORT || 3001
 const swaggerJSDoc = require("swagger-jsdoc");
