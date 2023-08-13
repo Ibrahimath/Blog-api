@@ -2,7 +2,7 @@ require('dotenv').config()
 const { Op } = require('sequelize');
 const { hashPassword, comparePassword } = require('../utils/helpers');
 const jwt = require('jsonwebtoken');
-const {v4: uuidv4 } = require('uuidv4')
+const {v4: uuidv4 } = require('uuid')
 const models = require('../models')
 const sequelize = require('sequelize');
 const { validateEditProfile, validateRegister,
@@ -94,7 +94,7 @@ const login = async (req, res) => {
         //generate token
         const token = jwt.sign({
             email: user.dataValues.email,
-            _id: uuid()
+            _id: uuidv4()
         }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
         res.status(200).json({
