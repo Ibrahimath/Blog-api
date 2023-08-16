@@ -105,7 +105,7 @@ const login = async (req, res) => {
     } catch (err) { 
         res.json({
             status: false,
-            message: err.message
+            message: err.message || "some error occurred"
         });
     }
 }
