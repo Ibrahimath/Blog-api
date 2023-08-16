@@ -17,11 +17,11 @@ app.use('/blog', userRoutes)
 const swaggerDefinition = {
     openapi: "3.0.0",
     info: {
-      title: "Social Media API",
+      title: "Blog API",
       version: "1.0.0",
       description: "Best platform  app",
       license: {
-        name: "zulfah",
+        name: "Ibrahim",
         url: "",
       },
       contact: {
